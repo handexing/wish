@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		   http://www.springframework.org/schema/task
+		   http://www.springframework.org/schema/task/spring-task-4.0.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	       http://www.springframework.org/schema/jee
+	       http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+ 		   http://www.springframework.org/schema/data/jpa
+ 		   http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+	 <!--加载配置文件-->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="locations">  
+           <list>  
+              <value>classpath:config.properties</value>  
+            </list>  
+        </property>  
+    </bean>
+    
+     <!--配置数据源-->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		  destroy-method="close" lazy-init="true">
+		<property name="url" value="${mysql_url}" />
+		<property name="username" value="${mysql_username}" />
+		<property name="password" value="${mysql_password}" />
+		<property name="driverClassName" value="${mysql_driverClassName}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="initialSize" value="${initialSize}" />
+		<!-- <property name="maxWait" value="${maxWait}" /> -->
+		<property name="minIdle" value="${minIdle}" />
+		<property name="maxIdle" value="${maxIdle}" />
+		<property name="defaultAutoCommit" value="true" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="30000" />
+		<property name="useUnfairLock" value="true" />
+		<!-- <property name="maxWaitThreadCount" value="1" /> -->
+		<property name="testOnBorrow">
+			<value>false</value>
+		</property>
+		<property name="testOnReturn">
+			<value>false</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis">
+			<value>1800000</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis">
+			<value>90000</value>
+		</property>
+		<property name="validationQuery">
+			<value>SELECT 1 </value>
+		</property>
+		<!-- <property name="useGlobalDataSourceStat" value="true" /> -->
+		<property name="filters" value="stat" />
+	</bean>
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
+		<property name="packagesToScan" >
+			<array>
+				<value>com.wish</value>
+			</array>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.ejb.naming_strategy">${hibernate.ejb.naming_strategy}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 重要配置：启用扫描并自动创建代理的功能  -->
+	<jpa:repositories base-package="com.wish"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
+
+	<!-- Hibernate对Jpa的实现 -->
+	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+
+	<!-- Jpa 事务管理器  -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- jdbc -->
+	<bean id="jdbcTemplate"
+		  class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+</beans>
