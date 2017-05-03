@@ -3,6 +3,7 @@
 ## 项目介绍
 - 使用spring、springmvc、spring data jpa
 - 持续集成各种常使用的javaweb技术
+- mysql数据库[数据库文件](https://github.com/handexing/wish/blob/master/src/main/webapp/doc/wish.sql)
 
 ## springMVC、spring、spring data jpa框架整合（一）
 - 整合spring、springmv、spring data jpa
