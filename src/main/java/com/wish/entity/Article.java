@@ -1,7 +1,8 @@
 package com.wish.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.wish.util.CustomDateSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -31,10 +32,12 @@ public class Article {
 	private String content;
 	@Column(name = "STATUS")
 	private Integer status;
-	@JsonSerialize(using = CustomDateSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
-	@JsonSerialize(using = CustomDateSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
 

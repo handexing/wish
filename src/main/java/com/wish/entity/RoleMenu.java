@@ -1,5 +1,9 @@
 package com.wish.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,6 +30,8 @@ public class RoleMenu {
 	private Long roleId;
 	@Column(name = "MENU_ID")
     private Long menuId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	@Column(name = "CREATE_TIME")
     private Date createTime;
 

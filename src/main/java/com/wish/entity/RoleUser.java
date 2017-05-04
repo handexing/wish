@@ -1,7 +1,8 @@
 package com.wish.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.wish.util.CustomDateSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -29,7 +30,8 @@ public class RoleUser {
 	private Long roleId;
 	@Column(name = "USER_ID")
 	private Long userId;
-	@JsonSerialize(using = CustomDateSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
 

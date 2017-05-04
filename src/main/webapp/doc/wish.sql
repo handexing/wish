@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-05-03 11:16:17
+Date: 2017-05-04 14:47:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,26 @@ CREATE TABLE `admin` (
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin` VALUES ('1', '小强', '123456');
+
+-- ----------------------------
+-- Table structure for article
+-- ----------------------------
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `TITLE` varchar(200) DEFAULT NULL COMMENT '标题',
+  `CONTENT` text COMMENT '内容',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `UPDATE_TIME` datetime DEFAULT NULL COMMENT '修改时间',
+  `STATUS` int(1) DEFAULT NULL COMMENT '状态',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of article
+-- ----------------------------
+INSERT INTO `article` VALUES ('4', 'hahaha', '# this is title111', '2017-05-02 09:37:29', '2017-05-02 09:38:50', '0');
+INSERT INTO `article` VALUES ('5', 'this is test', ':bowtie::smile:\n\n# fsdf\n\n![输入图片说明](http://localhost:8888/wish/upload/image/2017-05-02/cb7bb9a4-6c83-4e6d-b323-5de505d3ebda.jpg \"在这里输入图片标题\")', '2017-05-02 09:42:22', '2017-05-02 10:08:38', '0');
 
 -- ----------------------------
 -- Table structure for menu
@@ -53,6 +73,11 @@ INSERT INTO `menu` VALUES ('1', '0', '系统管理', '0', '2017-04-19 17:59:10',
 INSERT INTO `menu` VALUES ('3', '1', '用户列表', '0', '2017-04-20 13:25:00', 'user/userPage', '&#xe612;');
 INSERT INTO `menu` VALUES ('7', '1', '菜单列表', '0', '2017-04-20 14:13:36', 'menu/menuPage', '&#xe628;');
 INSERT INTO `menu` VALUES ('9', '1', '角色管理', '0', '2017-04-24 09:41:00', 'role/rolePage', '&#xe62e;');
+INSERT INTO `menu` VALUES ('12', '0', '文章管理', '0', '2017-04-28 10:29:42', '', '&#xe630;');
+INSERT INTO `menu` VALUES ('13', '12', '文章列表', '0', '2017-04-28 10:31:01', 'article/articlePage', '&#xe636;');
+INSERT INTO `menu` VALUES ('14', '0', '功能杂项', '0', '2017-05-02 10:30:57', '', '&#xe622;');
+INSERT INTO `menu` VALUES ('15', '14', '二维码', '0', '2017-05-02 10:31:20', 'qrcode/qrcodePage', '&#xe650;');
+
 -- ----------------------------
 -- Table structure for role
 -- ----------------------------
