@@ -18,4 +18,8 @@
 - 使用bootstarp markdown插件实现文章管理,[Bootstrap markdown官网](http://www.codingdrama.com/bootstrap-markdown/)
 - 使用谷歌开源项目zxing实现二维码在线生成功能[zxing github](https://github.com/zxing/zxing)
 
+## 任务调度
+- 整合spring+quartz完成基础定时任务，详情移驾[spring,quartz整合（一）](https://handexing.github.io/2017/05/04/spring+quartz(%E4%B8%80)/)
+- 动态任务调度(未完成)
+
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。

@@ -109,5 +109,36 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<!-- quartz配置 -->
+	
+	<!--要调度的对象-->
+	<bean id="taskJob" class="com.wish.service.test.QuartzJobService"/>
+	
+	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work"/>
+		<property name="name" value="job_work_name"/>
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject" ref="taskJob"/>
+		<!-- 调用的方法名称 -->
+		<property name="targetMethod" value="run"/>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="name" value="work_default_name"/>
+		<property name="group" value="work_default"/>
+		<property name="jobDetail" ref="jobDetail"/>
+		<property name="cronExpression" value="0/5 * * * * ?"/>
+	</bean>
+	 
+	<!-- 调度工厂 -->
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="myTrigger"/>
+			</list>
+		</property>
+	</bean>
 
 </beans>
