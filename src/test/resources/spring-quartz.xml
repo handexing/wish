@@ -12,28 +12,34 @@
 		                    http://www.springframework.org/schema/aop 
 		                    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
+
 	<!--要调度的对象-->
-	<bean id="jobBean" class="com.wish.dao.test.QuartzTest" />
+	<bean id="taskJob" class="com.wish.service.test.QuartzJobService"/>
 	
 	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="jobBean" />
-		<property name="targetMethod" value="execute" />
-		<!--将并发设置为false-->
-		<property name="concurrent" value="false" />
+		<property name="group" value="job_work"/>
+		<property name="name" value="job_work_name"/>
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject" ref="taskJob"/>
+		<!-- 调用的方法名称 -->
+		<property name="targetMethod" value="run"/>
 	</bean>
-	
-	<bean id="trigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="jobDetail" />
-		<!--表达式，我的是每 10 秒执行一次-->
-		<property name="cronExpression" value="0/10 * * * * ?" />
+	 
+	<!-- 调度触发器 -->
+	<bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="name" value="work_default_name"/>
+		<property name="group" value="work_default"/>
+		<property name="jobDetail" ref="jobDetail"/>
+		<!--表达式，我的是每 5秒执行一次-->
+		<property name="cronExpression" value="0/1 * * * * ?"/>
 	</bean>
-	
-	<!--  总管理类如果将lazy-init='false'那么容器启动就会执行调度程序   -->
-	<bean id="startQuertz" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+	 
+	<!-- 调度工厂 -->
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<!--作业调度器,list下可加入其他的调度器-->
-				<ref bean="trigger" />
+				<ref bean="myTrigger"/>
 			</list>
 		</property>
 	</bean>
