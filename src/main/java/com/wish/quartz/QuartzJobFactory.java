@@ -9,7 +9,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 /**
- * @Description: 计划任务执行处 无状态
+ * @Description: 计划任务执行处
  * @author handx 908716835@qq.com
  * @date 2017年5月7日 下午10:04:55
  *
