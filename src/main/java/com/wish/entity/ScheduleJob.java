@@ -23,9 +23,7 @@ import javax.persistence.Table;
 public class ScheduleJob {
 
 	public static final String STATUS_RUNNING = "1";
-	public static final String STATUS_NOT_RUNNING = "0";
-	public static final String CONCURRENT_IS = "1";
-	public static final String CONCURRENT_NOT = "0";
+	public static final String STOP_RUNNING = "0";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,8 +41,6 @@ public class ScheduleJob {
 	private String description;// 描述
 	@Column(name = "BEAN_CLASS")
 	private String beanClass;// 任务执行时调用哪个类的方法 包名+类名
-	@Column(name = "IS_CONCURRENT")
-	private String isConcurrent;// 任务是否有状态
 	@Column(name = "SPRING_ID")
 	private String springId;// spring bean
 	@Column(name = "METHOD_NAME")
@@ -72,10 +68,6 @@ public class ScheduleJob {
 
 	public String getDescription() {
 		return description;
-	}
-
-	public String getIsConcurrent() {
-		return isConcurrent;
 	}
 
 	public String getJobGroup() {
@@ -122,10 +114,6 @@ public class ScheduleJob {
 		this.description = description;
 	}
 
-	public void setIsConcurrent(String isConcurrent) {
-		this.isConcurrent = isConcurrent;
-	}
-
 	public void setJobGroup(String jobGroup) {
 		this.jobGroup = jobGroup;
 	}
@@ -158,7 +146,7 @@ public class ScheduleJob {
 	public String toString() {
 		return "ScheduleJob [jobId=" + jobId + ", jobName=" + jobName + ", jobGroup=" + jobGroup + ", jobStatus="
 				+ jobStatus + ", cronExpression=" + cronExpression + ", description=" + description + ", beanClass="
-				+ beanClass + ", isConcurrent=" + isConcurrent + ", springId=" + springId + ", methodName=" + methodName
+				+ beanClass + ", springId=" + springId + ", methodName=" + methodName
 				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 

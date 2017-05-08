@@ -24,7 +24,6 @@
 					<th>任务组</th>
 					<th>状态</th>
 					<th>cron表达式</th>
-					<!-- <th>同步否</th> -->
 					<th>类路径</th>
 					<th>springName</th>
 					<th>方法名</th>

@@ -3,7 +3,6 @@ package com.wish.service;
 import com.wish.dao.ScheduleJobDao;
 import com.wish.entity.ScheduleJob;
 import com.wish.quartz.QuartzJobFactory;
-import com.wish.quartz.QuartzJobFactoryDisallowConcurrentExecution;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -40,7 +39,6 @@ public class ScheduleJobService {
 	 * @param scheduleJob
 	 * @throws SchedulerException
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addJob(ScheduleJob job) throws SchedulerException {
 		if (job == null || !ScheduleJob.STATUS_RUNNING.equals(job.getJobStatus())) {
 			return;
@@ -53,8 +51,8 @@ public class ScheduleJobService {
 
 		// 不存在，创建一个
 		if (null == trigger) {
-			Class clazz = ScheduleJob.CONCURRENT_IS.equals(job.getIsConcurrent()) ? QuartzJobFactory.class : QuartzJobFactoryDisallowConcurrentExecution.class;
-			JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(job.getJobName(), job.getJobGroup()).build();
+			JobDetail jobDetail = JobBuilder.newJob(QuartzJobFactory.class)
+					.withIdentity(job.getJobName(), job.getJobGroup()).build();
 			jobDetail.getJobDataMap().put("scheduleJob", job);
 			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
 			trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobName(), job.getJobGroup()).withSchedule(scheduleBuilder).build();
@@ -89,7 +87,7 @@ public class ScheduleJobService {
 		}
 		if ("stop".equals(cmd)) {
 			deleteJob(job);
-			job.setJobStatus(ScheduleJob.STATUS_NOT_RUNNING);
+			job.setJobStatus(ScheduleJob.STOP_RUNNING);
 		} else if ("start".equals(cmd)) {
 			job.setJobStatus(ScheduleJob.STATUS_RUNNING);
 			addJob(job);
