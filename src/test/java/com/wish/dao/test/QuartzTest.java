@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class QuartzTest {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring-quartz.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring-quartz-test.xml");
 		context.getBean("scheduler");
 	}
 }

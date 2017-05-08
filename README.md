@@ -26,6 +26,9 @@
 
 ## 任务调度
 - 整合spring+quartz完成基础定时任务，详情移驾[spring,quartz整合（一）](https://handexing.github.io/2017/05/04/spring+quartz(%E4%B8%80)/)
-- 动态任务调度(未完成)
+- 动态任务调度[spring,quartz整合code](https://github.com/handexing/frameworkAggregate)
+
+![运行结果](https://handexing.github.io/images/posts/springquartz.png)
+
 
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。
