@@ -199,6 +199,13 @@
 			<artifactId>quartz-jobs</artifactId>
 			<version>${quartz.version}</version>
 		</dependency> 
+		
+		<!-- jsoup -->
+		<dependency>
+		  <groupId>org.jsoup</groupId>
+		  <artifactId>jsoup</artifactId>
+		  <version>1.10.2</version>
+		</dependency>
 
   </dependencies>
   

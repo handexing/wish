@@ -1,4 +1,4 @@
-# 下期功能---Spring+Quartz实现动态添加定时任务
+# 下期功能---学习JSOUP，结合定时任务爬取数据
 
 ## 项目介绍
 - 使用spring、springmvc、spring data jpa
@@ -30,5 +30,6 @@
 
 ![运行结果](https://handexing.github.io/images/posts/springquartz.png)
 
+## JSOUP爬虫学习
 
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。
