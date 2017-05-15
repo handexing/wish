@@ -1,9 +1,15 @@
-# 下期功能---学习JSOUP，结合定时任务爬取数据
+# 下期功能---jsoup框架使用爬取数据
 
 ## 项目介绍
 - 使用spring、springmvc、spring data jpa
 - 持续集成各种常使用的javaweb技术
 - mysql数据库[数据库文件](https://github.com/handexing/wish/blob/master/src/main/webapp/doc/wish.sql)
+
+## 系统管理
+
+- 用户管理（添加导出用户资料功能）
+- 菜单管理
+- 角色管理
 
 ## springMVC、spring、spring data jpa框架整合（一）
 - 整合spring、springmv、spring data jpa
@@ -31,5 +37,9 @@
 ![运行结果](https://handexing.github.io/images/posts/springquartz.png)
 
 ## JSOUP爬虫学习
+- 移到别的地方了[jsoup项目](https://github.com/handexing/frameworkAggregate)
+
+
+
 
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。

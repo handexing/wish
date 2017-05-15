@@ -18,6 +18,7 @@
 		<junit.version>4.10</junit.version>
 		<servlet.version>3.0.1</servlet.version>
 		<quartz.version>2.2.3</quartz.version>
+		<poi.version>3.15</poi.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
   
@@ -206,7 +207,24 @@
 		  <artifactId>jsoup</artifactId>
 		  <version>1.10.2</version>
 		</dependency>
-
+		
+		<!-- POI -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>${poi.version}</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml-schemas</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+	
   </dependencies>
   
   <build>

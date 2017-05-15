@@ -37,6 +37,10 @@ function userConfig(){
 			self.updateUser();
 		});
 		
+		$('#exportData').bind('click',function(){
+			window.location.href="exportData";
+		});
+		
 	}
 	
 	this.addUser=function(){

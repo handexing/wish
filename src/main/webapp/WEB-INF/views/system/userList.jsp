@@ -21,6 +21,7 @@
 	
 	        <button class="layui-btn" id="search"><i class="layui-icon">&#xe615;</i>搜索</button>
 	        <button class="layui-btn" id="adding"><i class="layui-icon">&#xe654;</i>新增</button>
+	        <button class="layui-btn" id="exportData"><i class="layui-icon">&#xe654;</i>导出</button>
 	    </div>
 	    
 	    <table class="table table-border table-bordered table-bg table-hover table-sort" id="userList" style="margin-top: 25px;">
