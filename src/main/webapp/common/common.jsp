@@ -1,4 +1,3 @@
-
 <!-- layer ui -->
 <link rel="stylesheet" href="${ctx}/js/plugins/layui/css/layui.css" media="all" />
 <link rel="stylesheet" href="${ctx}/css/global.css" media="all">
@@ -23,6 +22,14 @@
 <script type="text/javascript" src="${ctx}/js/plugins/h-ui/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/plugins/h-ui/static/h-ui.admin/js/H-ui.admin.js"></script>
 
+<script type="text/javascript" src="${ctx}/js/plugins/h-ui/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.form.js"></script>
 
 <script type="text/javascript" src="${ctx}/js/plugins/h-ui/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 
+
+<!-- bpmn js -->
+<script src="${ctx}/js/plugins/bower_components/bpmn-js/dist/bpmn-viewer.js"></script>
+<link rel="stylesheet" href="${ctx}/js/plugins/bower_components/bpmn-js/dist/assets/diagram-js.css" />
+<link rel="stylesheet" href="${ctx}/js/plugins/bower_components/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css" />
+<script src="${ctx}/js/plugins/bower_components/bpmn-js/dist/bpmn-modeler.js"></script>

@@ -19,6 +19,7 @@
 		<servlet.version>3.0.1</servlet.version>
 		<quartz.version>2.2.3</quartz.version>
 		<poi.version>3.15</poi.version>
+		<activiti-version>5.22.0</activiti-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
   
@@ -223,6 +224,18 @@
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml-schemas</artifactId>
 		    <version>${poi.version}</version>
+		</dependency>
+		
+		<!-- activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti-version}</version>
 		</dependency>
 	
   </dependencies>

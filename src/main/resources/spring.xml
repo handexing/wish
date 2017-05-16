@@ -23,13 +23,7 @@
  		   http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	 <!--加载配置文件-->
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="locations">  
-           <list>  
-              <value>classpath:config.properties</value>  
-            </list>  
-        </property>  
-    </bean>
+     <context:property-placeholder location="classpath:config.properties"/>
     
      <!--配置数据源-->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -112,5 +106,25 @@
 	<!-- quartz -->
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
 	<bean id="springUtils" class="com.wish.util.SpringUtils" />
+	
+	<!-- 配置activiti -->
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">  
+	    <property name="dataSource" ref="dataSource" />  
+	    <property name="transactionManager" ref="transactionManager" />  
+	    <property name="databaseSchemaUpdate" value="true" />  
+	    <property name="mailServerHost" value="localhost" />  
+	    <property name="mailServerPort" value="5025" />  
+	    <property name="jpaHandleTransaction" value="true" />  
+	    <property name="jpaCloseEntityManager" value="true" />  
+	    <property name="jobExecutorActivate" value="false" />  
+  	</bean>  
+  	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">  
+    	<property name="processEngineConfiguration" ref="processEngineConfiguration" />  
+  	</bean>  
+	<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />  
+	<bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />  
+	<bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />  
+	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />  
+	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
 
 </beans>
