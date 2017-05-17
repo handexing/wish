@@ -7,10 +7,6 @@ function processConfig(){
 	var self=this;
 	var mTable;
 	
-	var BpmnViewer = window.BpmnJS;
-	var viewer = new BpmnViewer({ container: '#canvas' });
-	var xhr = new XMLHttpRequest();
-
 	this.init=function(){
 		
 		myTable=$('#processList').DataTable({
@@ -27,28 +23,19 @@ function processConfig(){
 		                {"data": "name"},
 		                {"data": "version"},
 		                {"data": "resourceName"},
-		                {"data": "diagramResourceName"}
+		                {"data": "diagramResourceName"},
+		                {"data": "c","render":function( data, type, row ) {
+		                	return '<input class="btn btn-danger radius" onClick="del(\''+row.deploymentId+'\')" type="button" value="删除">';
+		                }}
 		              ]
 		});
 		
 		$("#processList").on("click","tr",function(){
 			var data=myTable.row(this).data();
-
-			/*xhr.onreadystatechange = function() {
-			    if (xhr.readyState === 4) {
-			        viewer.importXML(xhr.response, function(err) {
-			          if (!err) {
-			            console.log('success!');
-			            viewer.get('canvas').zoom('fit-viewport');
-			          } else {
-			            console.log('something went wrong:', err);
-			          }
-			        });
-			    }
-			};*/
-
-			xhr.open('GET', 'test.bpmn', true);
-			xhr.send(null);
+			 $.get("getBpmnSource",{id:data.id}, function(res) {
+	    		 process.importXML(res);
+	    		 $("#openProcessDialog").modal("show");
+	    	 });
 		});
 		
 		$('#adding').bind('click',function(){
@@ -87,9 +74,13 @@ function processConfig(){
 		
 	}
 	
-	this.jobList=function(){}
-	
 	self.init();
 	
 }
 
+function del(id){
+	$.get("delProcess",{id:id}, function(res) {
+		console.log(res);
+		window.location.reload(true);
+	 });
+}

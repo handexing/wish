@@ -30,6 +30,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,6 +105,23 @@ public class ProcessController {
 		return map;
 	}
 
+	@RequestMapping(value = "delProcess")
+	public ExecuteResult<Boolean> delProcess(String id) {
+		ExecuteResult<Boolean> result = new ExecuteResult<Boolean>();
+		try {
+			processEngine.getRepositoryService()
+			//普通删除,删除没有在执行的流程,如果流程正在执行,则抛出异常
+			//.deleteDeployment(deploymentId);
+			//级联删除,不管你在不在运行,会删除当前关联的所有信息,包括在历史表里的数据
+			.deleteDeployment(id, true);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			logger.error("", e);
+		}
+		return result;
+	}
+
 	@RequestMapping(value = "deployProcess", method = RequestMethod.POST)
 	public ExecuteResult<Boolean> deploy(HttpSession session, String uuid)
 			throws IOException {
@@ -123,6 +142,14 @@ public class ProcessController {
 			logger.error("", e);
 		}
 		return result;
+	}
+
+	@RequestMapping(value = "getBpmnSource", produces = "text/html;charset=UTF-8")
+	public String getBpmnSource(String id) throws IOException {
+		InputStream inputStream = repositoryService.getProcessModel(id);
+		StringWriter writer = new StringWriter();
+		IOUtils.copy(inputStream, writer);
+		return writer.toString();
 	}
 
 	@RequestMapping("listProcess")

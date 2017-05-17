@@ -24,6 +24,7 @@
 					<th width="100">版本号</th>  
 					<th width="100">资源文件名称</th> 
 					<th width="100">图片资源名称</th> 
+					<th width="100">操作</th> 
 		        </tr>
 	        </thead>
 	    </table>
@@ -59,14 +60,14 @@
 	</div>
 	
 	<div id="openProcessDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" style="margin-top: 100px;">
+		<div class="modal-dialog" style="width: 80%;height:500px;margin-top:100px;">
 			<div class="modal-content radius">
 				<div class="modal-header">
 					<h3 class="modal-title">详细流程</h3>
 					<a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
 				</div>
-				<div class="modal-body">
-					<div id="canvas"></div>
+				<div class="modal-body" style="height: 500px;">
+					<div id="canvas" style="width: 100%;height: 100%"></div>
 				</div>
 			</div>
 		</div>
