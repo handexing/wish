@@ -112,6 +112,21 @@ public class SchedulerJobController {
 		return result;
 	}
 
+	@RequestMapping("delJob")
+	@ResponseBody
+	public ExecuteResult<Boolean> delJob(Long jobId) {
+		ExecuteResult<Boolean> result = new ExecuteResult<Boolean>();
+		try {
+			scheduleJobDao.delete(jobId);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			logger.error("", e);
+			result.setErrorMsg("任务删除失败！");
+		}
+		return result;
+	}
+
 	@RequestMapping("jobList")
 	public RetJson jobList(Integer draw, Integer length, Integer start) {
 		RetJson retJson = new RetJson();

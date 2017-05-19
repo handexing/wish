@@ -68,10 +68,12 @@ function jobConfig(){
                  {"data": "c","render":function( data, type, row ) {
                 	 if(row.jobStatus == 0){
   	                	return '<input class="btn btn-primary radius" onClick="openJob(\''+row.jobId+'\',\'start\')" type="button" value="开启">&nbsp;&nbsp;'+
-  	                	'<input class="btn btn-secondary radius" onClick="updateCron(\''+row.jobId+'\',\''+row.cronExpression+'\')" type="button" value="修改CRON">';
+  	                	'<input class="btn btn-secondary radius" onClick="updateCron(\''+row.jobId+'\',\''+row.cronExpression+'\')" type="button" value="修改CRON">&nbsp;&nbsp;'+
+  	                	'<input class="	btn btn-warning radius" onClick="del(\''+row.jobId+'\')" type="button" value="删除">';
   	                }else{
   	                	return '<input class="btn btn-warning radius" onClick="openJob(\''+row.jobId+'\',\'stop\')" type="button" value="停止">&nbsp;&nbsp;'+
-  	                	'<input class="btn btn-secondary radius" onClick="updateCron(\''+row.jobId+'\',\''+row.cronExpression+'\')" type="button" value="修改CRON">';
+  	                	'<input class="btn btn-secondary radius" onClick="updateCron(\''+row.jobId+'\',\''+row.cronExpression+'\')" type="button" value="修改CRON">&nbsp;&nbsp;'+
+  	                	'<input class="	btn btn-warning radius" onClick="del(\''+row.jobId+'\')" type="button" value="删除">';
   	                }
 	                }}
              ]
@@ -166,4 +168,24 @@ function updateCron(jobId,cronExpression){
 	$("#updateDialog").modal("show");
 	$("#jobId").val(jobId);
 	$("#cron").val(cronExpression);
+}
+
+function del(jobId){
+	
+	layer.confirm('确定要删除吗？', {
+		  btn: ['确定','取消']
+	}, function(){
+		$.post("delJob", {"jobId":jobId}, function(data, status) {
+			if(data.success){
+				layer.msg('删除成功！', {icon: 2});
+				location.reload();
+			}else{
+				layer.msg('程序异常！', {icon: 5});
+			}
+		});
+	}, function(){
+		  
+	});
+	
+	
 }
