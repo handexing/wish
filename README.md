@@ -48,6 +48,18 @@
 > 后台定时检查请假事项，到达请假时间，开始启动请假流程。
  
 
+## 工程配置
+- eclipse
+- maven
+- mysql
+
+```
+git clone https://github.com/handexing/wish.git
+
+然后：
+import-->existing maven project
+```
+
 
 
 
