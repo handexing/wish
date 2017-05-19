@@ -6,6 +6,7 @@ function processConfig(){
 	
 	var self=this;
 	var mTable;
+	var runningProcessTable;
 	
 	this.init=function(){
 		
@@ -70,6 +71,25 @@ function processConfig(){
 		    error:function(){
 		    	layer.msg('添加失败！', {icon: 2});
 		    }
+		});
+		
+		
+		runningProcessTable=$('#runProcessList').DataTable({
+			 "processing": true,
+			 "ordering": false,
+			 "searching":false,
+		     "serverSide": true,
+		     "ajax": {
+		        "url":"runningProcessList"
+			 },
+		     "dataType":"json",
+		     "aLengthMenu": [10, 20, 30],
+		     "columns": [
+		                {"data": "name"},
+		                {"data": "version"},
+		                {"data": "resourceName"},
+		                {"data": "diagramResourceName"},
+		              ]
 		});
 		
 	}

@@ -13,6 +13,8 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
+import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -172,6 +174,23 @@ public class ProcessController {
 			retJson.setDraw(draw == null ? 0 : draw);
 		} catch (Exception e) {
 			logger.error("获取流程列表异常", e);
+		}
+		return retJson;
+	}
+
+	@RequestMapping("runningProcessList")
+	public RetJson runningProcessList(Integer draw, Integer length, Integer start) {
+		RetJson retJson = new RetJson();
+		try {
+			ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery();
+			long count = query.count();
+			List<ProcessInstance> listPage = query.listPage(start, length);
+			retJson.setData(listPage);
+			retJson.setRecordsTotal(count);
+			retJson.setRecordsFiltered(count);
+			retJson.setDraw(draw == null ? 0 : draw);
+		} catch (Exception e) {
+			logger.error("获取运行中流程列表异常", e);
 		}
 		return retJson;
 	}

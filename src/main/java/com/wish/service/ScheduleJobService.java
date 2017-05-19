@@ -20,6 +20,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -106,6 +107,26 @@ public class ScheduleJobService {
 		Scheduler scheduler = schedulerFactoryBean.getScheduler();
 		JobKey jobKey = JobKey.jobKey(scheduleJob.getJobName(), scheduleJob.getJobGroup());
 		scheduler.deleteJob(jobKey);
+	}
+
+	/**
+	 * @Title: initScheduler 
+	 * @Description:初始化定时任务
+	 * @param     设定文件 
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public void initScheduler() {
+		try {
+			List<ScheduleJob> list = scheduleJobDao.findAll();
+			for (ScheduleJob scheduleJob : list) {
+				if ("1".equals(scheduleJob.getJobStatus())) {
+					addJob(scheduleJob);
+				}
+			}
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

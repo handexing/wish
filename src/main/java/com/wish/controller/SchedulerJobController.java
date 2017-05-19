@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.lang.reflect.Method;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -119,16 +118,6 @@ public class SchedulerJobController {
 		final Sort sort = new Sort(Sort.Direction.DESC, "jobId");
 		final Pageable pageRequest = new PageRequest(PageUtil.calcPage(start), length, sort);
 		Page<ScheduleJob> pageData = scheduleJobDao.findAll(pageRequest);
-		List<ScheduleJob> jobList = pageData.getContent();
-		try {
-			for (ScheduleJob job : jobList) {
-				if ("1".equals(job.getJobStatus())) {
-					scheduleJobService.addJob(job);
-				}
-			}
-		} catch (SchedulerException e) {
-			e.printStackTrace();
-		}
 		retJson.setData(pageData.getContent());
 		retJson.setRecordsTotal(pageData.getTotalElements());
 		retJson.setRecordsFiltered(pageData.getTotalElements());

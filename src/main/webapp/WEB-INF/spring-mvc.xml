@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	
-	<!-- 自动扫描包，@controller-->
+
+	<!-- 自动扫描包，@controller -->
 	<context:component-scan base-package="com.wish" />
-		<!-- 启动springmvc注解 -->
-	<annotation-driven/>
-	
-	<beans:import resource="classpath*:spring.xml"/>
-	
-	<!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->  
-    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    	<beans:property name="defaultEncoding" value="UTF-8" />
-    	<beans:property name="maxUploadSize" value="10485760" />
-   </beans:bean>
-   
+	<!-- 启动springmvc注解 -->
+	<annotation-driven />
+
+	<beans:import resource="classpath*:spring.xml" />
+	<beans:import resource="classpath*:redis.xml" />
+
+	<!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding" value="UTF-8" />
+		<beans:property name="maxUploadSize" value="10485760" />
+	</beans:bean>
+
 	<!-- 定义文件后缀，视图模式配置 -->
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
 </beans:beans>

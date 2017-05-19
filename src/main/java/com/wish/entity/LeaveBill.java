@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -28,7 +29,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "LEAVE_BILL")
-public class LeaveBill {
+public class LeaveBill implements Serializable{
+
+	private static final long serialVersionUID = 2000001315172295755L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
