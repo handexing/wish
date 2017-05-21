@@ -48,7 +48,7 @@ public class LeaveBill implements Serializable{
 	@Column(name = "LEAVE_DATE")
 	private Date leaveDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	@Column(name = "CREATE_DATE")
 	private Date createDate;
 	@Column(name = "STATE")

@@ -2,6 +2,7 @@ package com.wish.controller;
 
 import com.wish.model.ActReProcdef;
 import com.wish.model.ExecuteResult;
+import com.wish.model.MyProcessInstance;
 import com.wish.model.RetJson;
 import com.wish.util.BpmnUtil;
 
@@ -181,11 +182,17 @@ public class ProcessController {
 	@RequestMapping("runningProcessList")
 	public RetJson runningProcessList(Integer draw, Integer length, Integer start) {
 		RetJson retJson = new RetJson();
+		List<MyProcessInstance> list = new ArrayList<MyProcessInstance>();
 		try {
 			ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery();
 			long count = query.count();
 			List<ProcessInstance> listPage = query.listPage(start, length);
-			retJson.setData(listPage);
+			for (ProcessInstance processInstance : listPage) {
+				MyProcessInstance a = new MyProcessInstance();
+				BeanUtils.copyProperties(a, processInstance);
+				list.add(a);
+			}
+			retJson.setData(list);
 			retJson.setRecordsTotal(count);
 			retJson.setRecordsFiltered(count);
 			retJson.setDraw(draw == null ? 0 : draw);
@@ -196,8 +203,13 @@ public class ProcessController {
 	}
 
 	@RequestMapping("processPage")
-	public ModelAndView showArticlePage() {
+	public ModelAndView showProcessPage() {
 		return new ModelAndView("/activiti/processList");
+	}
+
+	@RequestMapping("runningProcessPage")
+	public ModelAndView showRunningProcessPage() {
+		return new ModelAndView("/activiti/runningProcessList");
 	}
 
 }

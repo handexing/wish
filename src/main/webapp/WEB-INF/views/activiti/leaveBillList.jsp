@@ -25,6 +25,7 @@
 					<th width="100">开始日期</th> 
 					<th width="100">请假说明</th> 
 					<th width="100">状态</th> 
+					<th width="100">新建时间</th> 
 					<th width="100">备注</th> 
 		        </tr>
 	        </thead>

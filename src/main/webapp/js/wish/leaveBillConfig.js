@@ -26,7 +26,18 @@ function leaveBillConfig(){
 		                {"data": "days"},
 		                {"data": "leaveDate"},
 		                {"data": "content"},
-		                {"data": "state"},
+		                {"data": "c","render":function( data, type, row ) {
+		                	if(row.state == 0){
+		                		return "<span class=\"label label-default radius\">初始化</span>";
+		                	}else if(row.state == 1){
+		                		return "<span class=\"label label-primary radius\">审批中</span>";
+		                	}else if(row.state == 2){
+		                		return "<span class=\"label label-success radius\">审批完成</span>";
+		                	}else if(row.state == 3){
+		                		return "<span class=\"label label-warning radius\">审批失败</span>";
+		                	}
+		                }},
+		                {"data": "createDate"},
 		                {"data": "remark"}
 		              ]
 		});
