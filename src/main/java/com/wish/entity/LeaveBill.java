@@ -47,6 +47,10 @@ public class LeaveBill implements Serializable{
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	@Column(name = "LEAVE_DATE")
 	private Date leaveDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@Column(name = "CREATE_DATE")
+	private Date createDate;
 	@Column(name = "STATE")
 	private Integer state;
 
@@ -56,6 +60,10 @@ public class LeaveBill implements Serializable{
 
 	public String getContent() {
 		return content;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
 	}
 
 	public Integer getDays() {
@@ -84,6 +92,10 @@ public class LeaveBill implements Serializable{
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	public void setDays(Integer days) {

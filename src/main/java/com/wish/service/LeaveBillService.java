@@ -45,6 +45,7 @@ public class LeaveBillService {
 	public void saveLeaveBill(LeaveBill leaveBill, User user) throws SchedulerException {
 		leaveBill.setState(0);
 		leaveBill.setUser(user);
+		leaveBill.setCreateDate(new Date());
 		LeaveBillDao.save(leaveBill);
 	}
 
@@ -62,7 +63,7 @@ public class LeaveBillService {
 
 		String toDay = dfDate.format(new Date());
 		for (LeaveBill leaveBill : list) {
-			String leaveDate = dfDate.format(leaveBill.getLeaveDate());
+			String leaveDate = dfDate.format(leaveBill.getCreateDate());
 			if (leaveDate.equals(toDay)) {
 				logger.debug("可以开启。。。" + leaveBill.getUser().getName());
 			}
