@@ -1,9 +1,12 @@
 package com.wish.controller;
 
+import com.wish.entity.User;
 import com.wish.model.ActReProcdef;
 import com.wish.model.ExecuteResult;
 import com.wish.model.MyProcessInstance;
 import com.wish.model.RetJson;
+import com.wish.model.Task;
+import com.wish.service.ProcessService;
 import com.wish.util.BpmnUtil;
 
 import org.activiti.engine.HistoryService;
@@ -35,6 +38,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +58,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("process")
 public class ProcessController {
 
-
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
@@ -71,6 +74,8 @@ public class ProcessController {
 	ManagementService managementService;
 	@Autowired
 	BpmnUtil bpmnUtil;
+	@Autowired
+	ProcessService processService;
 
 	@RequestMapping(value = "cancelDeploy", method = RequestMethod.POST)
 	public void cancelDeploy(HttpSession session, String uuid) {
@@ -80,8 +85,7 @@ public class ProcessController {
 	}
 
 	@RequestMapping(value = "checkBpmn", method = RequestMethod.POST)
-	public Map<String, Object> checkBpmn(@RequestParam MultipartFile file, HttpSession session)
-			throws Exception {
+	public Map<String, Object> checkBpmn(@RequestParam MultipartFile file, HttpSession session) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean isExist = false;
 		if (!file.isEmpty()) {
@@ -94,7 +98,7 @@ public class ProcessController {
 				session.setAttribute("fileName", file.getOriginalFilename());
 				File tmpfile = new File(uuid);
 				FileOutputStream fos = new FileOutputStream(tmpfile);
-				IOUtils.copy(file.getInputStream(),fos);
+				IOUtils.copy(file.getInputStream(), fos);
 				fos.flush();
 				fos.close();
 				map.put("uuid", uuid);
@@ -113,10 +117,10 @@ public class ProcessController {
 		ExecuteResult<Boolean> result = new ExecuteResult<Boolean>();
 		try {
 			processEngine.getRepositoryService()
-			//普通删除,删除没有在执行的流程,如果流程正在执行,则抛出异常
-			//.deleteDeployment(deploymentId);
-			//级联删除,不管你在不在运行,会删除当前关联的所有信息,包括在历史表里的数据
-			.deleteDeployment(id, true);
+					// 普通删除,删除没有在执行的流程,如果流程正在执行,则抛出异常
+					// .deleteDeployment(deploymentId);
+					// 级联删除,不管你在不在运行,会删除当前关联的所有信息,包括在历史表里的数据
+					.deleteDeployment(id, true);
 			result.setSuccess(true);
 		} catch (Exception e) {
 			result.setSuccess(false);
@@ -126,8 +130,7 @@ public class ProcessController {
 	}
 
 	@RequestMapping(value = "deployProcess", method = RequestMethod.POST)
-	public ExecuteResult<Boolean> deploy(HttpSession session, String uuid)
-			throws IOException {
+	public ExecuteResult<Boolean> deploy(HttpSession session, String uuid) throws IOException {
 		ExecuteResult<Boolean> result = new ExecuteResult<Boolean>();
 		try {
 			File file = new File(uuid);
@@ -179,6 +182,28 @@ public class ProcessController {
 		return retJson;
 	}
 
+	@RequestMapping("listTask")
+	public RetJson listTask(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<Task> list = new ArrayList<Task>();
+		RetJson retJson = new RetJson();
+		List<org.activiti.engine.task.Task> listPage = taskService.createTaskQuery().taskAssignee(user.getAccount())
+				.orderByTaskCreateTime().asc().list();
+		try {
+			for (org.activiti.engine.task.Task task : listPage) {
+				Task a = new Task();
+				BeanUtils.copyProperties(a, task);
+				list.add(a);
+			}
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		retJson.setData(list);
+		return retJson;
+	}
+
 	@RequestMapping("runningProcessList")
 	public RetJson runningProcessList(Integer draw, Integer length, Integer start) {
 		RetJson retJson = new RetJson();
@@ -212,4 +237,8 @@ public class ProcessController {
 		return new ModelAndView("/activiti/runningProcessList");
 	}
 
+	@RequestMapping("taskProcessPage")
+	public ModelAndView showTaskProcessPage() {
+		return new ModelAndView("/activiti/taskList");
+	}
 }
