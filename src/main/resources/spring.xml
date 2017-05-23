@@ -126,6 +126,7 @@
 	<bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />  
 	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />  
 	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
+	<bean id="formService" factory-bean="processEngine" factory-method="getFormService" />
 	
 	<!-- 初始化定时任务，将状态为1的跑起来 -->
 	<bean id="scheduleJobService" class="com.wish.service.ScheduleJobService" init-method="initScheduler"/> 

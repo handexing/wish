@@ -59,7 +59,7 @@ public class LeaveBillService {
 		 * 3：获取当前任务的办理人，使用流程变量设置下一个任务的办理人 inputUser是流程变量的名称， 获取的办理人是流程变量的值
 		 */
 		Map<String, Object> variables = new HashMap<String, Object>();
-		variables.put("inputUser", leaveBill.getUser().getAccount());// 表示惟一用户
+		variables.put("inputUser", leaveBill.getUser().getName());// 表示惟一用户
 
 		/**
 		 * 4： (1)使用流程变量设置字符串（格式：Leavebill.id的形式），通过设置，让启动的流程（流程实例）关联业务
@@ -69,7 +69,7 @@ public class LeaveBillService {
 		String objId = key + "." + leaveBill.getId();
 		variables.put("objId", objId);
 
-		// 6：使用流程定义的key，启动流程实例，同时设置流程变量，同时向正在执行的执行对象表中的字段BUSINESS_KEY添加业务数据，同时让流程关联业务
+		// 5：使用流程定义的key，启动流程实例，同时设置流程变量，同时向正在执行的执行对象表中的字段BUSINESS_KEY添加业务数据，同时让流程关联业务
 		runtimeService.startProcessInstanceByKey(key, objId, variables);
 
 	}

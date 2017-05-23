@@ -26,6 +26,24 @@
 	    </table>
 	</div>
 	
+	<div id="showImgDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 50%;height:500px;margin-top:100px;">
+			<div class="modal-content radius">
+				<div class="modal-header">
+					<h3 class="modal-title">详细流程</h3>
+					<a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
+				</div>
+				<div class="modal-body" style="height: 500px;">
+					<!-- 1.获取到规则流程图-->
+					<img id="processImg" style="position: absolute;top: 0px;left: 0px;">
+
+					<!-- 2.根据当前活动的坐标，动态绘制DIV -->
+					<div id="taskNode"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script type="text/javascript" src="${ctx}/js/wish/taskConfig.js"></script>
 	
 	<script type="text/javascript">

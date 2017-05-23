@@ -24,6 +24,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -187,7 +189,7 @@ public class ProcessController {
 		User user = (User) session.getAttribute("user");
 		List<Task> list = new ArrayList<Task>();
 		RetJson retJson = new RetJson();
-		List<org.activiti.engine.task.Task> listPage = taskService.createTaskQuery().taskAssignee(user.getAccount())
+		List<org.activiti.engine.task.Task> listPage = taskService.createTaskQuery().taskAssignee(user.getName())
 				.orderByTaskCreateTime().asc().list();
 		try {
 			for (org.activiti.engine.task.Task task : listPage) {
@@ -241,4 +243,63 @@ public class ProcessController {
 	public ModelAndView showTaskProcessPage() {
 		return new ModelAndView("/activiti/taskList");
 	}
+
+	/**
+	 * 查看当前流程图（查看当前活动节点，并使用红色的框标注）
+	 */
+	@RequestMapping("viewCurrentImage")
+	public RetJson viewCurrentImage(String taskId, Model model) {
+
+		RetJson retJson = new RetJson();
+
+		try {
+			/** 一：查看流程图 */
+			// 1：获取任务ID，获取任务对象，使用任务对象获取流程定义ID，查询流程定义对象
+			ProcessDefinition pd = processService.findProcessDefinitionByTaskId(taskId);
+			model.addAttribute("deploymentId", pd.getDeploymentId());
+			model.addAttribute("imageName", pd.getDiagramResourceName());
+
+			/**
+			 * 二：查看当前活动，获取当期活动对应的坐标x,y,width,height，将4个值存放到Map<String,Object>中
+			 */
+			Map<String, Object> map = processService.findCoordingByTask(taskId);
+			model.addAttribute("acs", map);
+
+			retJson.setMessage("查看流程图成功。");
+			retJson.setStatus(1);
+			retJson.setData(model);
+		} catch (Exception e) {
+			retJson.setStatus(-1);
+			retJson.setMessage("查看流程图异常");
+			logger.error("查看流程图异常", e);
+		}
+		return retJson;
+	}
+
+	@RequestMapping(value = "viewImage", produces = "text/html;charset=UTF-8")
+	public void viewImage(HttpServletResponse response, String deploymentId, String imageName) throws Exception {
+		InputStream in = processService.findImageInputStream(deploymentId, imageName);
+		byte[] b = new byte[1024];
+		int len = -1;
+		while ((len = in.read(b, 0, 1024)) != -1) {
+			response.getOutputStream().write(b, 0, len);
+		}
+	}
+
+	@RequestMapping("viewTaskForm")
+	public ExecuteResult<Boolean> viewTaskForm(Model model, String taskId, HttpSession session) {
+		ExecuteResult<Boolean> result = new ExecuteResult<Boolean>();
+		try {
+			User user = (User) session.getAttribute("user");
+			processService.findTaskFormKeyByTaskId(taskId, user.getName());
+			result.setSuccess(true);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			logger.error("", e);
+		}
+		// model.addAttribute("taskId", taskId);
+		// return "redirect:" + url;
+		return result;
+	}
+
 }
