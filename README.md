@@ -1,4 +1,4 @@
-# 下期功能---Activiti工作流引擎使用
+# 下期功能---
 
 ## 项目介绍
 - 使用spring、springmvc、spring data jpa
@@ -22,19 +22,11 @@
 
 ## 文章管理，zxing二维码（四）
 - 使用bootstarp markdown插件实现文章管理,[Bootstrap markdown官网](http://www.codingdrama.com/bootstrap-markdown/)
-
-![运行结果](https://handexing.github.io/images/posts/articlePage.png)
-
 - 使用谷歌开源项目zxing实现二维码在线生成功能[zxing github](https://github.com/zxing/zxing)
-
-![运行结果](https://handexing.github.io/images/posts/zxingPage.png)
-
 
 ## 任务调度（五）
 - 整合spring+quartz完成基础定时任务，详情移驾[spring,quartz整合（一）](https://handexing.github.io/2017/05/04/spring+quartz(%E4%B8%80)/)
 - 动态任务调度[spring,quartz整合code](https://github.com/handexing/frameworkAggregate)，配置详情：[spring,quartz整合（二）](https://handexing.github.io/2017/05/08/spring+quartz(%E4%BA%8C)/)
-
-![运行结果](https://handexing.github.io/images/posts/springquartz.png)
 
 ## JSOUP爬虫学习（六）
 - 移到别的地方了[jsoup项目](https://github.com/handexing/frameworkAggregate)
@@ -54,6 +46,43 @@
 - mysql
 - redis
 - tomcat
+
+## 效果预览
+
+### 用户管理
+
+![登录界面](https://github.com/handexing/wish/raw/master/img/user.png)
+
+### 菜单管理
+
+![登录界面](https://github.com/handexing/wish/raw/master/img/menu.png)
+
+### 角色管理
+
+![登录界面](https://github.com/handexing/wish/raw/master/img/role.png)
+
+### 文章管理
+
+![登录界面](https://github.com/handexing/wish/raw/master/img/article.png)
+
+###　功能杂项管理
+
+![登录界面](https://github.com/handexing/wish/raw/master/img/code.png)
+
+### 工作流管理
+
+- 流程列表
+
+![登录界面](https://github.com/handexing/wish/raw/master/img/processtask.png)
+
+- 任务管理
+
+![登录界面](https://github.com/handexing/wish/raw/master/img/processlist.png)
+
+### 动态任务管理
+
+![登录界面](https://github.com/handexing/wish/raw/master/img/tasklist.png)
+
 
 ```
 **git clone https://github.com/handexing/wish.git**
