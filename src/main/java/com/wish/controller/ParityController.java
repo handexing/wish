@@ -68,4 +68,9 @@ public class ParityController {
 		return new ModelAndView("/parity/parityList");
 	}
 
+	@RequestMapping("skuInfoPage")
+	public ModelAndView showSkuInfoPage() {
+		return new ModelAndView("/parity/skuInfoList");
+	}
+
 }
