@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-07-18 16:45:05
+Date: 2017-07-24 17:59:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -716,12 +716,13 @@ CREATE TABLE `admin` (
   `NAME` varchar(255) DEFAULT NULL,
   `PSW` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin` VALUES ('1', '小强', '123456');
+INSERT INTO `admin` VALUES ('2', '小强', '123456');
 
 -- ----------------------------
 -- Table structure for article
@@ -735,7 +736,7 @@ CREATE TABLE `article` (
   `UPDATE_TIME` datetime DEFAULT NULL COMMENT '修改时间',
   `STATUS` int(1) DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
 -- Records of article
@@ -777,7 +778,7 @@ CREATE TABLE `flower_category` (
   `IMGPATH` varchar(255) DEFAULT NULL COMMENT '图片路径',
   `CREATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of flower_category
@@ -799,6 +800,23 @@ INSERT INTO `flower_category` VALUES ('14', '凤梨科植物', 'http://www.aihuh
 INSERT INTO `flower_category` VALUES ('15', '棕榈科植物', 'http://www.aihuhua.com/baike/zonglv/', 'http://pic1.huashichang.com/2013/0723/23/51eea5ca9e799_70_70.jpg', '2017-05-12 10:44:00');
 INSERT INTO `flower_category` VALUES ('16', '藻类植物', 'http://www.aihuhua.com/baike/zaolei/', 'http://pic1.huashichang.com/2014/1118/00/546a1ba513c3a_70_70.jpg', '2017-05-12 10:44:00');
 INSERT INTO `flower_category` VALUES ('17', '地衣植物', 'http://www.aihuhua.com/baike/diyi/', 'http://pic1.huashichang.com/2014/1118/00/546a1bc3e4733_70_70.jpg', '2017-05-12 10:44:00');
+INSERT INTO `flower_category` VALUES ('18', '草本花卉', 'http://www.aihuhua.com/baike/caoben/', 'http://pic1.huashichang.com/2013/0723/23/51ee9daccb116_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('19', '木本花卉', 'http://www.aihuhua.com/baike/muben/', 'http://pic1.huashichang.com/2013/0723/23/51ee9f923378d_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('20', '球根花卉', 'http://www.aihuhua.com/baike/qiugen/', 'http://pic1.huashichang.com/2013/0723/23/51eea0047647f_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('21', '兰科花卉', 'http://www.aihuhua.com/baike/lan/', 'http://pic1.huashichang.com/2013/0723/23/51eea1653c81a_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('22', '宿根花卉', 'http://www.aihuhua.com/baike/sugen/', 'http://pic1.huashichang.com/2013/0723/23/51eea1534c584_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('23', '仙人掌', 'http://www.aihuhua.com/baike/xianrenzhang/', 'http://pic1.huashichang.com/2013/0723/23/51eea1df50dde_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('24', '多肉多浆植物', 'http://www.aihuhua.com/baike/duorouduojiang/', 'http://pic1.huashichang.com/2013/0723/23/51eea23fc1c8d_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('25', '草坪与地被植物', 'http://www.aihuhua.com/baike/caopingdibei/', 'http://pic1.huashichang.com/2013/0723/23/51eea2b717560_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('26', '水生花卉', 'http://www.aihuhua.com/baike/shuisheng/', 'http://pic1.huashichang.com/2013/0723/23/51eea31fa673f_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('27', '蕨类植物', 'http://www.aihuhua.com/baike/juelei/', 'http://pic1.huashichang.com/2013/0723/23/51eea3824ed86_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('28', '苔藓植物', 'http://www.aihuhua.com/baike/taixian/', 'http://pic1.huashichang.com/2014/1117/23/546a1b7b6251e_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('29', '岩生花卉', 'http://www.aihuhua.com/baike/yansheng/', 'http://pic1.huashichang.com/2013/0723/23/51eea418d9f65_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('30', '食虫植物', 'http://www.aihuhua.com/baike/shichong/', 'http://pic1.huashichang.com/2013/0723/23/51eea473af954_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('31', '凤梨科植物', 'http://www.aihuhua.com/baike/fengli/', 'http://pic1.huashichang.com/2013/0723/23/51eea4dbd157b_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('32', '棕榈科植物', 'http://www.aihuhua.com/baike/zonglv/', 'http://pic1.huashichang.com/2013/0723/23/51eea5ca9e799_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('33', '藻类植物', 'http://www.aihuhua.com/baike/zaolei/', 'http://pic1.huashichang.com/2014/1118/00/546a1ba513c3a_70_70.jpg', null);
+INSERT INTO `flower_category` VALUES ('34', '地衣植物', 'http://www.aihuhua.com/baike/diyi/', 'http://pic1.huashichang.com/2014/1118/00/546a1bc3e4733_70_70.jpg', null);
 
 -- ----------------------------
 -- Table structure for leave_bill
@@ -835,7 +853,7 @@ CREATE TABLE `menu` (
   `HREF` varchar(200) DEFAULT NULL COMMENT '请求地址',
   `ICON` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   PRIMARY KEY (`ID`,`PID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of menu
@@ -855,6 +873,8 @@ INSERT INTO `menu` VALUES ('21', '0', '动态任务管理', '0', '2017-05-19 09:
 INSERT INTO `menu` VALUES ('22', '21', '任务列表', '0', '2017-05-19 09:51:05', 'job/jobPage', '&#xe609;');
 INSERT INTO `menu` VALUES ('23', '17', '运行流程列表', '0', '2017-05-21 16:21:18', 'process/runningProcessPage', '&#xe60e;');
 INSERT INTO `menu` VALUES ('24', '17', '任务管理', '0', '2017-05-22 15:57:10', 'process/taskProcessPage', '&#xe60b;');
+INSERT INTO `menu` VALUES ('25', '0', '商品比价管理', '0', '2017-07-24 16:35:39', '', '&#xe62c;');
+INSERT INTO `menu` VALUES ('26', '25', '商品列表', '0', '2017-07-24 16:36:49', 'goods/parityPage', '&#xe60c;');
 
 -- ----------------------------
 -- Table structure for person
@@ -904,7 +924,7 @@ CREATE TABLE `role` (
   `STATUS` int(11) DEFAULT NULL COMMENT '状态',
   `CREATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='权限表';
 
 -- ----------------------------
 -- Records of role
@@ -922,28 +942,30 @@ CREATE TABLE `role_menu` (
   `MENU_ID` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   `CREATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=257 DEFAULT CHARSET=utf8mb4 COMMENT='权限菜单表';
 
 -- ----------------------------
 -- Records of role_menu
 -- ----------------------------
 INSERT INTO `role_menu` VALUES ('125', '2', '3', '2017-04-27 17:20:32');
 INSERT INTO `role_menu` VALUES ('126', '2', '1', '2017-04-27 17:20:32');
-INSERT INTO `role_menu` VALUES ('225', '1', '1', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('226', '1', '3', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('227', '1', '7', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('228', '1', '9', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('229', '1', '12', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('230', '1', '13', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('231', '1', '14', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('232', '1', '15', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('233', '1', '17', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('234', '1', '18', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('235', '1', '19', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('236', '1', '21', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('237', '1', '22', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('238', '1', '23', '2017-05-22 15:57:18');
-INSERT INTO `role_menu` VALUES ('239', '1', '24', '2017-05-22 15:57:18');
+INSERT INTO `role_menu` VALUES ('240', '1', '1', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('241', '1', '3', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('242', '1', '7', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('243', '1', '9', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('244', '1', '12', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('245', '1', '13', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('246', '1', '14', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('247', '1', '15', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('248', '1', '17', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('249', '1', '18', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('250', '1', '19', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('251', '1', '21', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('252', '1', '22', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('253', '1', '23', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('254', '1', '24', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('255', '1', '25', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('256', '1', '26', '2017-07-24 16:37:00');
 
 -- ----------------------------
 -- Table structure for role_user
@@ -955,7 +977,7 @@ CREATE TABLE `role_user` (
   `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `CREATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='权限用户表';
 
 -- ----------------------------
 -- Records of role_user
@@ -982,15 +1004,51 @@ CREATE TABLE `schedule_job` (
   `CREATE_TIME` datetime DEFAULT NULL,
   `UPDATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`JOB_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='定时任务表';
 
 -- ----------------------------
 -- Records of schedule_job
 -- ----------------------------
 INSERT INTO `schedule_job` VALUES ('2', 'main', 'main', '0', '0/1 * * * * ?', '	this is test', 'com.wish.quartz.Handx', '', 'main', '2017-05-08 09:48:23', '2017-05-08 14:25:13');
 INSERT INTO `schedule_job` VALUES ('4', 'springBean', 'springBean', '0', '0/1 * * * * ?', '这是调用一个springid测试', '', 'mySpringQuartz', 'run', '2017-05-08 13:58:56', '2017-05-11 14:34:56');
-INSERT INTO `schedule_job` VALUES ('5', 'startProcess', 'startProcess', '1', '0/5 * * * * ?', '定时启动请假', '', 'leaveBillService', 'startProcess', '2017-05-19 09:43:09', '2017-05-23 09:44:02');
+INSERT INTO `schedule_job` VALUES ('5', 'startProcess', 'startProcess', '0', '0/5 * * * * ?', '定时启动请假', '', 'leaveBillService', 'startProcess', '2017-05-19 09:43:09', '2017-07-18 16:55:28');
 INSERT INTO `schedule_job` VALUES ('6', 'initRedisData', 'initRedisData', '0', '0/5 * * * * ?', '定时同步数据到redis中', '', 'redisScheduler', 'initRedis', '2017-05-19 10:56:22', '2017-05-19 18:22:37');
+
+-- ----------------------------
+-- Table structure for sku_info
+-- ----------------------------
+DROP TABLE IF EXISTS `sku_info`;
+CREATE TABLE `sku_info` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `SKU_SRC_ID` bigint(20) DEFAULT NULL,
+  `TITLE` varchar(255) DEFAULT NULL,
+  `SUBTITLE` varchar(255) DEFAULT NULL,
+  `PRICE` decimal(10,0) DEFAULT NULL,
+  `DATE_ID` date DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='爬虫商品表';
+
+-- ----------------------------
+-- Records of sku_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sku_src
+-- ----------------------------
+DROP TABLE IF EXISTS `sku_src`;
+CREATE TABLE `sku_src` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `SKU_CODE` varchar(255) DEFAULT NULL COMMENT '商品Id',
+  `PLATFM_CODE` int(11) DEFAULT NULL COMMENT '来源',
+  `URL` varchar(255) DEFAULT NULL COMMENT '地址',
+  `CREATE_TIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='爬虫资源表';
+
+-- ----------------------------
+-- Records of sku_src
+-- ----------------------------
+INSERT INTO `sku_src` VALUES ('1', '10586461914', '1', 'https://item.m.jd.com/product/10586461914.html', '2017-07-24 17:58:29');
 
 -- ----------------------------
 -- Table structure for user
@@ -1005,7 +1063,7 @@ CREATE TABLE `user` (
   `STATUS` int(11) DEFAULT NULL COMMENT '状态',
   `CREATE_TIME` datetime DEFAULT NULL COMMENT '新建时间',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of user
