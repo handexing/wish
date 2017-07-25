@@ -30,13 +30,14 @@ public class SkuInfo {
 	@Column(name = "TITLE")
 	private String title;
 	@Column(name = "SUBTITLE")
-	private Integer subtitle;
+	private String subtitle;
 	@Column(name = "PRICE")
-	private String price;
+	private Double price;
 	@DateTimeFormat(pattern = "yyyyMMdd")
 	@JsonFormat(pattern = "yyyyMMdd", timezone = "GMT+8")
 	@Column(name = "DATE_ID")
 	private Date dateId;
+
 	public Date getDateId() {
 		return dateId;
 	}
@@ -45,7 +46,7 @@ public class SkuInfo {
 		return id;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
@@ -53,7 +54,7 @@ public class SkuInfo {
 		return skuSrcId;
 	}
 
-	public Integer getSubtitle() {
+	public String getSubtitle() {
 		return subtitle;
 	}
 
@@ -65,11 +66,13 @@ public class SkuInfo {
 		this.dateId = dateId;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -77,9 +80,12 @@ public class SkuInfo {
 		this.skuSrcId = skuSrcId;
 	}
 
-	public void setSubtitle(Integer subtitle) {
+
+
+	public void setSubtitle(String subtitle) {
 		this.subtitle = subtitle;
 	}
+
 
 	public void setTitle(String title) {
 		this.title = title;
