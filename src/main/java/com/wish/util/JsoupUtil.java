@@ -3,11 +3,11 @@ package com.wish.util;
 import com.wish.entity.SkuInfo;
 import com.wish.entity.SkuSrc;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-import java.io.IOException;
+import org.openqa.selenium.WebDriver;
 
 /**
  * @author Pinky Lam 908716835@qq.com
@@ -17,7 +17,7 @@ public class JsoupUtil {
 
 	public final static Logger log = Logger.getLogger(JsoupUtil.class);
 
-	public static SkuInfo getGoods1(SkuSrc skuSrc) throws InterruptedException {
+	public SkuInfo getGoods(WebDriver driver, SkuSrc skuSrc) {
 
 		SkuInfo pisSkuInfo = new SkuInfo();
 
@@ -25,9 +25,15 @@ public class JsoupUtil {
 		log.info("正在爬取：" + url);
 		try {
 			Thread.sleep(500);
-			Document doc = Jsoup.connect(url).get();
+			driver.get(url);
+			log.info(driver.getTitle());
+			Document doc = Jsoup.parse(driver.getPageSource());
 
 			String goodName = doc.select("#goodName").attr("value");
+			if (StringUtils.isEmpty(goodName)) {
+				log.warn("请求url有误！" + url);
+				return null;
+			}
 			pisSkuInfo.setTitle(goodName);
 			String price = doc.select("#jdPrice").attr("value");
 			if ("暂无报价".equals(price)) {
@@ -38,7 +44,7 @@ public class JsoupUtil {
 			String prodSubName = doc.select(".prod-act").text();
 			pisSkuInfo.setSubtitle(prodSubName);
 			return pisSkuInfo;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.warn("请求url有误！" + skuSrc.getUrl());
 			e.printStackTrace();
 		}

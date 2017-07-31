@@ -1,6 +1,8 @@
 package com.wish.controller;
 
+import com.wish.dao.SkuInfoDao;
 import com.wish.dao.SkuSrcDao;
+import com.wish.entity.SkuInfo;
 import com.wish.entity.SkuSrc;
 import com.wish.model.ExecuteResult;
 import com.wish.model.RetJson;
@@ -29,6 +31,8 @@ public class ParityController {
 
 	@Autowired
 	SkuSrcDao skuSrcDao;
+	@Autowired
+	SkuInfoDao skuInfoDao;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -71,6 +75,19 @@ public class ParityController {
 	@RequestMapping("skuInfoPage")
 	public ModelAndView showSkuInfoPage() {
 		return new ModelAndView("/parity/skuInfoList");
+	}
+
+	@RequestMapping("skuInfoList")
+	public RetJson skuInfoList(Integer draw, Integer length, Integer start) {
+		RetJson retJson = new RetJson();
+		final Sort sort = new Sort(Sort.Direction.DESC, "id");
+		final Pageable pageRequest = new PageRequest(PageUtil.calcPage(start), length, sort);
+		Page<SkuInfo> pageData = skuInfoDao.findAll(pageRequest);
+		retJson.setData(pageData.getContent());
+		retJson.setRecordsTotal(pageData.getTotalElements());
+		retJson.setRecordsFiltered(pageData.getTotalElements());
+		retJson.setDraw(draw == null ? 0 : draw);
+		return retJson;
 	}
 
 }

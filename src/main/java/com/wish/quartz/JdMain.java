@@ -7,18 +7,21 @@ import com.wish.entity.SkuSrc;
 import com.wish.util.Constants;
 import com.wish.util.DateUtil;
 import com.wish.util.JsoupUtil;
+import com.wish.util.PropertiesUtils;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @ClassName: JdMain
@@ -28,6 +31,35 @@ import java.util.concurrent.Executors;
  */
 @Service
 public class JdMain {
+
+	/**
+	 * @Title: getWebDriver
+	 * @Description: 获取WebDriver实例
+	 * @return WebDriver
+	 */
+	public static WebDriver getWebDriver() {
+
+		DesiredCapabilities dCaps = new DesiredCapabilities();
+		dCaps.setCapability("phantomjs.page.settings.userAgent",
+				"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
+		dCaps.setCapability("phantomjs.page.customHeaders.User-Agent",
+				"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
+
+		dCaps.setCapability("phantomjs.page.customHeaders.Referer", "https://m.jd.com/");
+
+		dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+				new String[] { "--load-images=false", "--disk-cache=true", "--ignore-ssl-errors=true" });
+		try {
+			System.setProperty(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+					PropertiesUtils.getProperty(PropertiesUtils.PHANTOMJS_DRIVER_PATH));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		WebDriver driver = new PhantomJSDriver(dCaps);
+		return driver;
+	}
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -41,24 +73,28 @@ public class JdMain {
 		logger.info("=======================开始爬取数据=======================");
 
 		List<SkuSrc> list = skuSrcDao.findSkuSrcByPlatfmCode(Constants.JD);
-
 		long start = System.currentTimeMillis();
-		ExecutorService p = Executors.newFixedThreadPool(Constants.MAX_THREAD_CNT);
-		final List<Callable<Integer>> partitions = new ArrayList<Callable<Integer>>();
+		WebDriver driver = getWebDriver();
 
 		try {
-			for (final SkuSrc skuSrc : list) {
-				partitions.add(new Callable<Integer>() {
-					public Integer call() throws Exception {
-						SkuInfo skuInfo = JsoupUtil.getGoods1(skuSrc);
-						skuInfoDao.save(skuInfo);
-						return 0;
-					}
-				});
+			int i = 0;
+			for (final SkuSrc sku : list) {
+				++i;
+				if (i % 100 == 0) {
+					driver.quit();
+					logger.info("退出程序....停止2S...");
+					Thread.sleep(2000);
+					logger.info("开启程序.......");
+					driver = getWebDriver();
+				}
+				Thread.sleep(1000);
+				SkuInfo skuInfo = new JsoupUtil().getGoods(driver, sku);
+				if (skuInfo != null) {
+					skuInfoDao.save(skuInfo);
+				}
 			}
-			p.invokeAll(partitions);
-			p.shutdown();
-		} catch (InterruptedException e) {
+			driver.quit();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

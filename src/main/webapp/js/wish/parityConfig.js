@@ -10,6 +10,7 @@ function parityConfig(){
 	this.init=function(){
 		
 		self.parityList();
+		self.skuInfoList();
 		
 		$('#adding').bind('click',function(){
 			$("#createDialog").modal("show");
@@ -71,6 +72,31 @@ function parityConfig(){
 	                }}
              ]
          });
+		
+	}
+	
+	this.skuInfoList=function(){
+		
+		mTable = $('#skuInfoList').DataTable({
+			"processing": true,
+			"ordering": false,
+			"searching": false,
+			"serverSide": true,
+			"ajax": {
+				"url": "skuInfoList"
+			},
+			"dataType": "json",
+			"aLengthMenu": [10, 20, 30],
+			"columns": [
+			            {"data": "title"},
+			            {"data": "subtitle"},
+			            {"data": "price"},
+			            {"data": "dateId"},
+			            {"data": "c","render":function( data, type, row ) {
+			            	return '<input class="btn btn-primary radius" onClick="preview(\''+row.id+'\')" type="button" value="爬取">';
+			            }}
+			            ]
+		});
 		
 	}
 
