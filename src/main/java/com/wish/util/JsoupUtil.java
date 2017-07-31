@@ -9,6 +9,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Date;
+
 /**
  * @author Pinky Lam 908716835@qq.com
  * @date 2017年7月25日 下午9:37:22
@@ -28,6 +30,8 @@ public class JsoupUtil {
 			driver.get(url);
 			log.info(driver.getTitle());
 			Document doc = Jsoup.parse(driver.getPageSource());
+			pisSkuInfo.setSkuSrcId(skuSrc.getId());
+			pisSkuInfo.setDateId(new Date());
 
 			String goodName = doc.select("#goodName").attr("value");
 			if (StringUtils.isEmpty(goodName)) {
