@@ -84,6 +84,21 @@
 
 ![登录界面](https://github.com/handexing/wish/raw/master/img/tasklist.png)
 
+### 商品比价
+
+- 根据phantomjs爬取数据，jsoup解析数据
+- 使用定时任务每天定时爬取数据，使用echarts展示数据变化
+
+#### 准备爬取的数据
+
+![资源路径](https://github.com/handexing/wish/raw/master/img/skusrc.png)
+
+#### 已经爬取的数据
+
+![资源路径](https://github.com/handexing/wish/raw/master/img/skuinfo.png)
+
+#### 商品价格趋势图
+
 
 ```
 **git clone https://github.com/handexing/wish.git**
