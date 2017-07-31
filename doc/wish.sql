@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-07-24 17:59:09
+Date: 2017-07-31 15:00:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -853,7 +853,7 @@ CREATE TABLE `menu` (
   `HREF` varchar(200) DEFAULT NULL COMMENT '请求地址',
   `ICON` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   PRIMARY KEY (`ID`,`PID`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of menu
@@ -874,7 +874,8 @@ INSERT INTO `menu` VALUES ('22', '21', '任务列表', '0', '2017-05-19 09:51:05
 INSERT INTO `menu` VALUES ('23', '17', '运行流程列表', '0', '2017-05-21 16:21:18', 'process/runningProcessPage', '&#xe60e;');
 INSERT INTO `menu` VALUES ('24', '17', '任务管理', '0', '2017-05-22 15:57:10', 'process/taskProcessPage', '&#xe60b;');
 INSERT INTO `menu` VALUES ('25', '0', '商品比价管理', '0', '2017-07-24 16:35:39', '', '&#xe62c;');
-INSERT INTO `menu` VALUES ('26', '25', '商品列表', '0', '2017-07-24 16:36:49', 'goods/parityPage', '&#xe60c;');
+INSERT INTO `menu` VALUES ('26', '25', 'URL资源列表', '0', '2017-07-24 16:36:49', 'goods/parityPage', '&#xe60c;');
+INSERT INTO `menu` VALUES ('27', '25', '商品列表', '0', '2017-07-24 18:05:59', 'goods/skuInfoPage', '&#xe650;');
 
 -- ----------------------------
 -- Table structure for person
@@ -942,30 +943,31 @@ CREATE TABLE `role_menu` (
   `MENU_ID` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   `CREATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=257 DEFAULT CHARSET=utf8mb4 COMMENT='权限菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=275 DEFAULT CHARSET=utf8mb4 COMMENT='权限菜单表';
 
 -- ----------------------------
 -- Records of role_menu
 -- ----------------------------
 INSERT INTO `role_menu` VALUES ('125', '2', '3', '2017-04-27 17:20:32');
 INSERT INTO `role_menu` VALUES ('126', '2', '1', '2017-04-27 17:20:32');
-INSERT INTO `role_menu` VALUES ('240', '1', '1', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('241', '1', '3', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('242', '1', '7', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('243', '1', '9', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('244', '1', '12', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('245', '1', '13', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('246', '1', '14', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('247', '1', '15', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('248', '1', '17', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('249', '1', '18', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('250', '1', '19', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('251', '1', '21', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('252', '1', '22', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('253', '1', '23', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('254', '1', '24', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('255', '1', '25', '2017-07-24 16:37:00');
-INSERT INTO `role_menu` VALUES ('256', '1', '26', '2017-07-24 16:37:00');
+INSERT INTO `role_menu` VALUES ('257', '1', '1', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('258', '1', '3', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('259', '1', '7', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('260', '1', '9', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('261', '1', '12', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('262', '1', '13', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('263', '1', '14', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('264', '1', '15', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('265', '1', '17', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('266', '1', '18', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('267', '1', '19', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('268', '1', '21', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('269', '1', '22', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('270', '1', '23', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('271', '1', '24', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('272', '1', '25', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('273', '1', '26', '2017-07-24 18:06:47');
+INSERT INTO `role_menu` VALUES ('274', '1', '27', '2017-07-24 18:06:47');
 
 -- ----------------------------
 -- Table structure for role_user
@@ -1004,7 +1006,7 @@ CREATE TABLE `schedule_job` (
   `CREATE_TIME` datetime DEFAULT NULL,
   `UPDATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`JOB_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='定时任务表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='定时任务表';
 
 -- ----------------------------
 -- Records of schedule_job
@@ -1013,6 +1015,7 @@ INSERT INTO `schedule_job` VALUES ('2', 'main', 'main', '0', '0/1 * * * * ?', '	
 INSERT INTO `schedule_job` VALUES ('4', 'springBean', 'springBean', '0', '0/1 * * * * ?', '这是调用一个springid测试', '', 'mySpringQuartz', 'run', '2017-05-08 13:58:56', '2017-05-11 14:34:56');
 INSERT INTO `schedule_job` VALUES ('5', 'startProcess', 'startProcess', '0', '0/5 * * * * ?', '定时启动请假', '', 'leaveBillService', 'startProcess', '2017-05-19 09:43:09', '2017-07-18 16:55:28');
 INSERT INTO `schedule_job` VALUES ('6', 'initRedisData', 'initRedisData', '0', '0/5 * * * * ?', '定时同步数据到redis中', '', 'redisScheduler', 'initRedis', '2017-05-19 10:56:22', '2017-05-19 18:22:37');
+INSERT INTO `schedule_job` VALUES ('7', '爬虫', 'crawler', '1', '0 45 14 ? * *', '京东爬虫', '', 'jdMain', 'jdMain', '2017-07-27 16:38:44', '2017-07-31 14:43:33');
 
 -- ----------------------------
 -- Table structure for sku_info
@@ -1024,13 +1027,22 @@ CREATE TABLE `sku_info` (
   `TITLE` varchar(255) DEFAULT NULL,
   `SUBTITLE` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,0) DEFAULT NULL,
-  `DATE_ID` date DEFAULT NULL,
+  `DATE_ID` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='爬虫商品表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='爬虫商品表';
 
 -- ----------------------------
 -- Records of sku_info
 -- ----------------------------
+INSERT INTO `sku_info` VALUES ('2', '1', '【京东超市】Olay玉兰油 水感透白光塑晚安水凝膜130g 亮肤睡眠面膜免洗', '京仓发货，品质保障！清凉一下，幸福不怕晒！更多活动详见链接', '159', '2017-07-31 00:00:00');
+INSERT INTO `sku_info` VALUES ('3', '2', '【京东超市】良品铺子京致礼盒 干果坚果 零食大礼包 14袋装 送礼 每日坚果 组合装混合套餐 1548g', '【京东自营】【良品铺子致女神礼盒】 有故事·好零食(此商品不参加上述活动)July要好食光，热热热热热热热！不出门，快乐享购！高颜值美食，看这里》', '118', '2017-07-31 00:00:00');
+INSERT INTO `sku_info` VALUES ('4', '3', '【京东超市】三只松鼠 坚果炒货 零食奶油味 夏威夷果265g/袋', '三只松鼠京东自营新品零食狂欢爆款低至199减100', '26', '2017-07-31 00:00:00');
+INSERT INTO `sku_info` VALUES ('5', '4', '【京东超市】沃隆 每日坚果 坚果炒货 休闲零食  成人款 （25g*30包） 750g/盒', '', '148', '2017-07-31 00:00:00');
+INSERT INTO `sku_info` VALUES ('6', '5', '【京东超市】三只松鼠 坚果炒货 零食奶香味 手剥巴旦木235g/袋', '三只松鼠京东自营新品零食狂欢爆款低至199减100', '20', '2017-07-31 00:00:00');
+INSERT INTO `sku_info` VALUES ('7', '6', '格力（GREE）正1.5匹 变频 品圆 冷暖 壁挂式空调 KFR-35GW/(35592)FNhDa-A3', '【格力月末放“价”购】抗暑实力派！这个夏天有它就够了！凑单套购更优惠~满6000减200，满10000减400~~~7万好评！节能省电！冰临盛夏优惠购~部分产品白条六期免息~', '3379', '2017-07-31 00:00:00');
+INSERT INTO `sku_info` VALUES ('8', '7', '格力（GREE）正1.5匹 定速 品圆 冷暖 壁挂式空调 KFR-35GW/(35592)NhDa-3', '【格力月末放“价”购】抗暑实力派！这个夏天有它就够了！凑单套购更优惠~满6000减200，满10000减400~~~4万好评！高性价比！冰临盛夏优惠购~部分产品白条六期免息~', '2779', '2017-07-31 00:00:00');
+INSERT INTO `sku_info` VALUES ('9', '8', '格力(GREE) 3匹 变频 Q铂 立柜式冷暖空调 KFR-72LW/(72596)FNAa-A3', '【16点开抢！满减成交价6459！格力月末放“价”购！】抗暑实力派！这个夏天有它就够了！凑单套购更优惠~满6000减200，满10000减400~~~2万好评！冰临盛夏优惠购~部分产品白条六期免息~', '6699', '2017-07-31 00:00:00');
+INSERT INTO `sku_info` VALUES ('10', '9', '格力（GREE）正1.5匹 变频冷暖 智享 微联智能 壁挂式空调 KFR-35GW/(35559)FNAd-A3（WIFI）', '【格力月末放“价”购！】抗暑实力派！这个夏天有它就够了！凑单套购更优惠~满6000减200，满10000减400~~~3万好评！柔湿温控！冰临盛夏优惠购~部分产品白条六期免息~', '3379', '2017-07-31 00:00:00');
 
 -- ----------------------------
 -- Table structure for sku_src
@@ -1043,12 +1055,20 @@ CREATE TABLE `sku_src` (
   `URL` varchar(255) DEFAULT NULL COMMENT '地址',
   `CREATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='爬虫资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='爬虫资源表';
 
 -- ----------------------------
 -- Records of sku_src
 -- ----------------------------
 INSERT INTO `sku_src` VALUES ('1', '10586461914', '1', 'https://item.m.jd.com/product/10586461914.html', '2017-07-24 17:58:29');
+INSERT INTO `sku_src` VALUES ('2', '4821384', '1', 'https://item.m.jd.com/product/4821384.html', '2017-07-31 14:24:02');
+INSERT INTO `sku_src` VALUES ('3', '2518087', '1', 'https://item.m.jd.com/product/2518087.html', '2017-07-31 14:24:31');
+INSERT INTO `sku_src` VALUES ('4', '2156342', '1', 'https://item.m.jd.com/product/2156342.html', '2017-07-31 14:25:57');
+INSERT INTO `sku_src` VALUES ('5', '2543198', '1', 'https://item.m.jd.com/product/2543198.html', '2017-07-31 14:26:43');
+INSERT INTO `sku_src` VALUES ('6', '1993092', '1', 'https://item.m.jd.com/product/1993092.html', '2017-07-31 14:27:56');
+INSERT INTO `sku_src` VALUES ('7', '1993087', '1', 'https://item.m.jd.com/product/1993087.html', '2017-07-31 14:30:35');
+INSERT INTO `sku_src` VALUES ('8', '1361956', '1', 'https://item.m.jd.com/product/1361956.html', '2017-07-31 14:34:10');
+INSERT INTO `sku_src` VALUES ('9', '2942414', '1', 'https://item.m.jd.com/product/2942414.html', '2017-07-31 14:41:05');
 
 -- ----------------------------
 -- Table structure for user

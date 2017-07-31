@@ -6,11 +6,39 @@ function parityConfig(){
 	
 	var self=this;
 	var mTable;
+	var skuInfoTable;
+	var myChart;
 
 	this.init=function(){
 		
-		self.parityList();
-		self.skuInfoList();
+		mTable = $('#parityList').DataTable({
+            "processing": true,
+            "ordering": false,
+            "searching": false,
+            "serverSide": true,
+            "ajax": {
+                "url": "goodsList"
+            },
+            "dataType": "json",
+            "aLengthMenu": [10, 20, 30],
+            "columns": [
+                {"data": "c","render":function( data, type, row ) {
+                        	console.log(row);
+                        	if(row.platfmCode == 1){
+                        		return "京东";
+                        	}else if(row.platfmCode == 2){
+                        		return "淘宝";
+                        	}else if(row.platfmCode == 3){
+                        		return "亚马逊";
+                        	}
+                        }},
+                {"data": "skuCode"},
+                {"data": "url"},
+                {"data": "createTime"}
+            ]
+        });
+		
+		
 		
 		$('#adding').bind('click',function(){
 			$("#createDialog").modal("show");
@@ -48,36 +76,7 @@ function parityConfig(){
 			
 		});
 		
-	
-	}
-	
-	this.parityList=function(){
-		
-		 mTable = $('#parityList').DataTable({
-             "processing": true,
-             "ordering": false,
-             "searching": false,
-             "serverSide": true,
-             "ajax": {
-                 "url": "goodsList"
-             },
-             "dataType": "json",
-             "aLengthMenu": [10, 20, 30],
-             "columns": [
-                 {"data": "skuCode"},
-                 {"data": "url"},
-                 {"data": "createTime"},
-                 {"data": "c","render":function( data, type, row ) {
-	                	return '<input class="btn btn-primary radius" onClick="preview(\''+row.id+'\')" type="button" value="爬取">';
-	                }}
-             ]
-         });
-		
-	}
-	
-	this.skuInfoList=function(){
-		
-		mTable = $('#skuInfoList').DataTable({
+		skuInfoTable = $('#skuInfoList').DataTable({
 			"processing": true,
 			"ordering": false,
 			"searching": false,
@@ -91,15 +90,65 @@ function parityConfig(){
 			            {"data": "title"},
 			            {"data": "subtitle"},
 			            {"data": "price"},
-			            {"data": "dateId"},
-			            {"data": "c","render":function( data, type, row ) {
-			            	return '<input class="btn btn-primary radius" onClick="preview(\''+row.id+'\')" type="button" value="爬取">';
-			            }}
-			            ]
+			            {"data": "dateId"}
+			        ]
+		});
+		$("#skuInfoList").on("click","tr",function(){
+			var data=skuInfoTable.row(this).data();
+			if(data){
+				
+				$("#skuInfoDialog").modal("show");
+				myChart = echarts.init(document.getElementById('main'));
+				
+				myChart.setOption({
+		        	title: {
+		        		text: data.title
+		        	},
+		        	tooltip: {
+						trigger: 'axis'
+					},
+					grid: {
+						left: '3%',
+						right: '4%',
+						bottom: '3%',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'category',
+						boundaryGap: false,
+						data: []
+					},
+					yAxis: {
+						type: 'value'
+					},
+		        	series: [{
+		        		name: '价格',
+		        		type: 'line',
+		        		data: []
+		        	}]
+		        });
+				
+				$.post("getSkuInfoList", {"skuSrcId":data.skuSrcId}, function(data, status) {
+					if(data.success){
+						console.log(data.data);
+						myChart.setOption({
+						    xAxis: {
+						        data: data.data.categories
+						    },
+					        series: [{
+					            data: data.data.data
+					        }]
+					    });
+					}else{
+						layer.msg('获取失败！', {icon: 5});
+						myChart.hideLoading();   
+					}
+				});
+			}
 		});
 		
 	}
-
+	
 	self.init();
 	
 }

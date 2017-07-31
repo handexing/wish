@@ -56,6 +56,13 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
 		return days;
 	}
 
+	public static String getDateFormatStr(Date date) {
+		if (date == null) {
+			return dfDate.format(new Date());
+		}
+		return dfDate.format(date);
+	}
+
 	public static Date getEndDate(Date date) {
 		String source = dfDate.format(date);
 		return getEndDate(source);
@@ -87,7 +94,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
 		}
 		return date;
 	}
-
+	
 	/**
 	 * 月最后一天
 	 * @param date
@@ -126,7 +133,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
         return result;
 
     }
-	
+
 	/**
 	 * 月第一天
 	 * @param date
@@ -267,5 +274,4 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
 	public synchronized static String serialNumber(){
 		return serialFormatter.format(new Date());
 	}
-
 }

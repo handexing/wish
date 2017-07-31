@@ -17,12 +17,25 @@
 		        <tr class="text-c">
 		            <th>名称</th>
 		            <th>副标题</th>
-		            <th>价格</th>
-		            <th>创建时间</th>
-		            <th>操作</th>
+		            <th width="70">价格</th>
+		            <th width="100">创建时间</th>
 		        </tr>
 	        </thead>
 	    </table>
+	</div>
+	
+	<div id="skuInfoDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog"  style="width: 70%;height:500px;margin-top: 50px;">
+			<div class="modal-content radius">
+				<div class="modal-header">
+					<h3 class="modal-title">历史比价结果</h3>
+					<a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
+				</div>
+				<div class="modal-body" style="width: 100%;height:500px;">
+					<div id="main" style="width: 1200px;height: 500px;"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<script type="text/javascript" src="${ctx}/js/wish/parityConfig.js"></script>

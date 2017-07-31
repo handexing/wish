@@ -6,7 +6,9 @@ import com.wish.entity.SkuInfo;
 import com.wish.entity.SkuSrc;
 import com.wish.model.ExecuteResult;
 import com.wish.model.RetJson;
+import com.wish.util.DateUtil;
 import com.wish.util.PageUtil;
+import com.wish.vo.EchartsVo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Pinky Lam 908716835@qq.com
@@ -47,6 +50,37 @@ public class ParityController {
 			skuSrc.setCreateTime(new Date());
 			skuSrcDao.save(skuSrc);
 			result.setSuccess(true);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			logger.error("", e);
+		}
+		return result;
+	}
+
+	@RequestMapping("getSkuInfoList")
+	public ExecuteResult<EchartsVo> getSkuInfoList(String skuSrcId) {
+		ExecuteResult<EchartsVo> result = new ExecuteResult<EchartsVo>();
+		try {
+			List<SkuInfo> list = skuInfoDao.findSkuInfoBySkuSrcId(skuSrcId);
+			EchartsVo echartsVo = new EchartsVo();
+			
+			if (!list.isEmpty()) {
+				String[] categories = new String[list.size()];
+				for (int i = 0; i < list.size(); i++) {
+					categories[i] = DateUtil.getDateFormatStr(list.get(i).getDateId());
+				}
+				String[] data = new String[list.size()];
+				for (int i = 0; i < list.size(); i++) {
+					data[i] = String.valueOf(list.get(i).getPrice());
+				}
+				echartsVo.setCategories(categories);
+				echartsVo.setData(data);
+				result.setData(echartsVo);
+				result.setSuccess(true);
+			} else {
+				result.setData(echartsVo);
+				result.setSuccess(false);
+			}
 		} catch (Exception e) {
 			result.setSuccess(false);
 			logger.error("", e);

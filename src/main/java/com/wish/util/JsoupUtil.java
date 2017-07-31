@@ -30,7 +30,7 @@ public class JsoupUtil {
 			driver.get(url);
 			log.info(driver.getTitle());
 			Document doc = Jsoup.parse(driver.getPageSource());
-			pisSkuInfo.setSkuSrcId(skuSrc.getId());
+			pisSkuInfo.setSkuSrcId(skuSrc.getSkuCode());
 			pisSkuInfo.setDateId(new Date());
 
 			String goodName = doc.select("#goodName").attr("value");

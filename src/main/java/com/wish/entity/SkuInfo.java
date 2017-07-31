@@ -26,15 +26,15 @@ public class SkuInfo {
 	@Column(name = "ID")
 	private Long id;
 	@Column(name = "SKU_SRC_ID")
-	private Long skuSrcId;
+	private String skuSrcId;
 	@Column(name = "TITLE")
 	private String title;
 	@Column(name = "SUBTITLE")
 	private String subtitle;
 	@Column(name = "PRICE")
 	private Double price;
-	@DateTimeFormat(pattern = "yyyyMMdd")
-	@JsonFormat(pattern = "yyyyMMdd", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	@Column(name = "DATE_ID")
 	private Date dateId;
 
@@ -50,7 +50,7 @@ public class SkuInfo {
 		return price;
 	}
 
-	public Long getSkuSrcId() {
+	public String getSkuSrcId() {
 		return skuSrcId;
 	}
 
@@ -76,7 +76,7 @@ public class SkuInfo {
 		this.price = price;
 	}
 
-	public void setSkuSrcId(Long skuSrcId) {
+	public void setSkuSrcId(String skuSrcId) {
 		this.skuSrcId = skuSrcId;
 	}
 

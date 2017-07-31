@@ -19,10 +19,10 @@
 	    <table class="table table-border table-bordered table-bg table-hover table-sort" id="parityList" style="margin-top: 25px;">
 	        <thead>
 		        <tr class="text-c">
+		            <th>平台</th>
 		            <th>sku编码</th>
 		            <th>URL</th>
 		            <th>创建时间</th>
-		            <th>操作</th>
 		        </tr>
 	        </thead>
 	    </table>

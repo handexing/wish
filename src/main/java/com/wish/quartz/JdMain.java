@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,9 +61,9 @@ public class JdMain {
 	}
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired
 	SkuSrcDao skuSrcDao;
+
 	@Autowired
 	SkuInfoDao skuInfoDao;
 
@@ -100,7 +99,7 @@ public class JdMain {
 
 		long end = System.currentTimeMillis();
 		logger.info("爬取耗时：" + (end - start) / 1000 / 60 + "分");
-		logger.info("==============日期：" + DateUtil.getStartDate(new Date()) + "-抓取完毕=============");
+		logger.info("==============日期：" + DateUtil.getDateFormatStr(null) + "-抓取完毕=============");
 
 	}
 }

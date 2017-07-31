@@ -35,4 +35,5 @@
 <script src="${ctx}/js/plugins/bower_components/bpmn-js/dist/bpmn-navigated-viewer.js"></script>
 
 
-
+<!-- echarts -->
+<script  type="text/javascript" src="${ctx}/js/plugins/echarts/echarts.js"></script>

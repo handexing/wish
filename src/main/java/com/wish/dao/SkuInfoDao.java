@@ -5,6 +5,8 @@ import com.wish.entity.SkuInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Pinky Lam 908716835@qq.com
  * @date 2017年7月24日 下午4:29:29
@@ -13,4 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SkuInfoDao extends JpaRepository<SkuInfo, Long> {
 
+	public List<SkuInfo> findSkuInfoBySkuSrcId(String skuSrcId);
 }
