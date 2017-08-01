@@ -7,7 +7,6 @@ import com.wish.entity.SkuSrc;
 import com.wish.model.ExecuteResult;
 import com.wish.model.RetJson;
 import com.wish.util.DateUtil;
-import com.wish.util.PageUtil;
 import com.wish.vo.EchartsVo;
 
 import org.slf4j.Logger;
@@ -92,7 +91,7 @@ public class ParityController {
 	public RetJson goodsList(Integer draw, Integer length, Integer start) {
 		RetJson retJson = new RetJson();
 		final Sort sort = new Sort(Sort.Direction.DESC, "id");
-		final Pageable pageRequest = new PageRequest(PageUtil.calcPage(start), length, sort);
+		final Pageable pageRequest = new PageRequest(start / length, length, sort);
 		Page<SkuSrc> pageData = skuSrcDao.findAll(pageRequest);
 		retJson.setData(pageData.getContent());
 		retJson.setRecordsTotal(pageData.getTotalElements());
@@ -115,7 +114,7 @@ public class ParityController {
 	public RetJson skuInfoList(Integer draw, Integer length, Integer start) {
 		RetJson retJson = new RetJson();
 		final Sort sort = new Sort(Sort.Direction.DESC, "id");
-		final Pageable pageRequest = new PageRequest(PageUtil.calcPage(start), length, sort);
+		final Pageable pageRequest = new PageRequest(start / length, length, sort);
 		Page<SkuInfo> pageData = skuInfoDao.findAll(pageRequest);
 		retJson.setData(pageData.getContent());
 		retJson.setRecordsTotal(pageData.getTotalElements());

@@ -6,7 +6,6 @@ import com.wish.entity.User;
 import com.wish.model.ExecuteResult;
 import com.wish.model.RetJson;
 import com.wish.service.LeaveBillService;
-import com.wish.util.PageUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +54,7 @@ public class LeaveBillController {
 	public RetJson leaveBillList(Integer draw, Integer length, Integer start) {
 		RetJson retJson = new RetJson();
 		final Sort sort = new Sort(Sort.Direction.DESC, "id");
-		final Pageable pageRequest = new PageRequest(PageUtil.calcPage(start), length, sort);
+		final Pageable pageRequest = new PageRequest(start / length, length, sort);
 		Page<LeaveBill> pageData = leaveBillDao.findAll(pageRequest);
 		retJson.setData(pageData.getContent());
 		retJson.setRecordsTotal(pageData.getTotalElements());

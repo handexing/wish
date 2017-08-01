@@ -6,7 +6,6 @@ import com.wish.model.ExecuteResult;
 import com.wish.model.ImgaeVo;
 import com.wish.model.RetJson;
 import com.wish.service.ArticleService;
-import com.wish.util.PageUtil;
 import com.wish.util.TimeUtil;
 
 import org.apache.commons.io.FilenameUtils;
@@ -51,7 +50,7 @@ public class ArticleController {
 	public RetJson articleList(String title, Integer draw, Integer length, Integer start) {
 		RetJson retJson = new RetJson();
 		final Sort sort = new Sort(Sort.Direction.DESC, "id");
-		final Pageable pageRequest = new PageRequest(PageUtil.calcPage(start), length, sort);
+		final Pageable pageRequest = new PageRequest(start / length, length, sort);
 
 		if (StringUtils.isEmpty(title)) {
 			Page<Article> pageData = articleDao.findAll(pageRequest);

@@ -5,7 +5,6 @@ import com.wish.entity.ScheduleJob;
 import com.wish.model.ExecuteResult;
 import com.wish.model.RetJson;
 import com.wish.service.ScheduleJobService;
-import com.wish.util.PageUtil;
 import com.wish.util.SpringUtils;
 
 import org.apache.commons.lang.StringUtils;
@@ -131,7 +130,7 @@ public class SchedulerJobController {
 	public RetJson jobList(Integer draw, Integer length, Integer start) {
 		RetJson retJson = new RetJson();
 		final Sort sort = new Sort(Sort.Direction.DESC, "jobId");
-		final Pageable pageRequest = new PageRequest(PageUtil.calcPage(start), length, sort);
+		final Pageable pageRequest = new PageRequest(start / length, length, sort);
 		Page<ScheduleJob> pageData = scheduleJobDao.findAll(pageRequest);
 		retJson.setData(pageData.getContent());
 		retJson.setRecordsTotal(pageData.getTotalElements());
