@@ -104,6 +104,11 @@
 
 #### 商品价格趋势图
 
+> 价格升降趋势图
+
+![格力空调](https://github.com/handexing/wish/raw/master/img/geli.png)
+
+![三只松鼠](https://github.com/handexing/wish/raw/master/img/ss.png)
 
 ```
 **git clone https://github.com/handexing/wish.git**
