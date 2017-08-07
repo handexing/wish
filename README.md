@@ -1,4 +1,4 @@
-# 下期功能---商品比价
+# 下期功能---Swagger2 接口管理
 
 ## 项目介绍
 - 使用spring、springmvc、spring data jpa
