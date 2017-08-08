@@ -41,6 +41,9 @@
 - 根据phantomjs爬取数据，jsoup解析数据
 - 使用定时任务每天定时爬取数据，使用echarts展示数据变化
 
+## swagger2 API管理（九）
+- 详细配置查看[swagger和springmvc整合](http://blog.csdn.net/u010681724/article/details/76887465)
+
 
 > 后台定时检查请假事项，到达请假时间，开始启动请假流程。
  
@@ -108,7 +111,11 @@
 
 ![格力空调](https://github.com/handexing/wish/raw/master/img/geli.png)
 
-![三只松鼠](https://github.com/handexing/wish/raw/master/img/ss.png)
+![格力空调](https://github.com/handexing/wish/raw/master/img/ss.png)
+
+### 接口管理
+
+![swagger](https://github.com/handexing/wish/raw/master/img/swagger.png)
 
 ```
 **git clone https://github.com/handexing/wish.git**
